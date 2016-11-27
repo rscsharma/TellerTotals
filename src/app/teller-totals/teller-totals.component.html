@@ -1,0 +1,65 @@
+
+<i class="fa fa-american-sign-language-interpreting fa-2x" aria-hidden="true"> </i>
+<span class="fa fa-camera-retro"></span>
+<alert type="success">hello</alert>
+
+
+
+<div class="input-group">
+<label for="date">Date</label>
+<input id="date" class="form-control" type="text" [ngModel]="dateValue" (focus)="showDatePicker = true">
+  <button type="button" class="btn" (click)="showDatePicker = !showDatePicker"><span class="fa fa-calendar"></span></button>
+
+</div>
+
+<div class="input-group">
+  <span class="input-group-addon" (click)="showDatePicker = !showDatePicker"><i class="fa fa-key fa-fw"></i></span>
+  <input class="form-control" type="password" placeholder="Password">
+</div>
+
+<div *ngIf="showDatePicker" style="position: absolute; z-index:10; min-height:290px;">
+  <datepicker [(ngModel)]="dateValue" (blur)="showDatePicker = false"></datepicker>
+</div>
+
+<table>
+  <tr>
+    <td>Ones:</td>
+    <td><input [(ngModel)]="ones"></td>
+    <td>{{onesAmount | currency:'USD':false:'1.2-2'}}</td>
+  </tr>
+  <tr>
+    <td>Twos:</td>
+    <td><input [(ngModel)]="twos"></td>
+    <td>{{twosAmount}}</td>
+  </tr>
+  <tr>
+    <td>Fives:</td>
+    <td><input [(ngModel)]="fives"></td>
+    <td>{{fivesAmount}}</td>
+  </tr>
+  <tr>
+    <td>Tens:</td>
+    <td><input [(ngModel)]="tens"></td>
+    <td>{{tensAmount}}</td>
+  </tr>
+  <tr>
+    <td>Twenties:</td>
+    <td><input [(ngModel)]="twenties"></td>
+    <td>{{twentiesAmount}}</td>
+  </tr>
+  <tr>
+    <td>Fifties:</td>
+    <td><input [(ngModel)]="fifties"></td>
+    <td>{{fiftiesAmount}}</td>
+  </tr>
+  <tr>
+    <td>Hundreds:</td>
+    <td><input [(ngModel)]="hundreds"></td>
+    <td>{{hundredsAmount}}</td>
+  </tr>
+  <tr>
+    <td>Totals:</td>
+    <td></td>
+    <td>{{totalAmount}}</td>
+  </tr>
+</table>
