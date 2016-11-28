@@ -1,65 +1,78 @@
+<h1>
+  Teller Totals
+</h1>
+<div class="row">
+	<div class="card col-sm-3">
 
-<i class="fa fa-american-sign-language-interpreting fa-2x" aria-hidden="true"> </i>
-<span class="fa fa-camera-retro"></span>
-<alert type="success">hello</alert>
+    <!--
+    <alert type="success">hello</alert>
+    -->
 
-
-
-<div class="input-group">
-<label for="date">Date</label>
-<input id="date" class="form-control" type="text" [ngModel]="dateValue" (focus)="showDatePicker = true">
-  <button type="button" class="btn" (click)="showDatePicker = !showDatePicker"><span class="fa fa-calendar"></span></button>
-
-</div>
-
-<div class="input-group">
-  <span class="input-group-addon" (click)="showDatePicker = !showDatePicker"><i class="fa fa-key fa-fw"></i></span>
-  <input class="form-control" type="password" placeholder="Password">
-</div>
+    <label for="date-value">Date</label>
+    <div class="input-group">
+       <input type="text" class="form-control" [(ngModel)]="dateValueString" id="date-value">
+       <span class="input-group-btn">
+         <button class="btn btn-secondary" type="button" (click)="showDatePicker = !showDatePicker"><span class="fa fa-calendar"></span></button>
+       </span>
+    </div>
 
 <div *ngIf="showDatePicker" style="position: absolute; z-index:10; min-height:290px;">
-  <datepicker [(ngModel)]="dateValue" (blur)="showDatePicker = false"></datepicker>
+  <datepicker [(ngModel)]="dateValue" (selectionDone)="showDatePicker = false"></datepicker>
 </div>
+</div>  <!-- col -->
 
-<table>
+<div class="card col-sm-5">
+
+<table class="table table-condensed">
+  <caption>Drawer</caption>
+  <tr>
+    <th>Denomination</th>
+    <th>Count</th>
+    <th>Amount</th>
+  </tr>
   <tr>
     <td>Ones:</td>
     <td><input [(ngModel)]="ones"></td>
-    <td>{{onesAmount | currency:'USD':false:'1.2-2'}}</td>
+    <td class="text-right">{{onesAmount | number:'1.2-2'}}</td>
   </tr>
   <tr>
     <td>Twos:</td>
     <td><input [(ngModel)]="twos"></td>
-    <td>{{twosAmount}}</td>
+    <td class="text-right">{{twosAmount | number:'1.2-2'}}</td>
   </tr>
   <tr>
     <td>Fives:</td>
     <td><input [(ngModel)]="fives"></td>
-    <td>{{fivesAmount}}</td>
+    <td class="text-right">{{fivesAmount | number:'1.2-2'}}</td>
   </tr>
   <tr>
     <td>Tens:</td>
     <td><input [(ngModel)]="tens"></td>
-    <td>{{tensAmount}}</td>
+    <td class="text-right">{{tensAmount | number:'1.2-2'}}</td>
   </tr>
   <tr>
     <td>Twenties:</td>
     <td><input [(ngModel)]="twenties"></td>
-    <td>{{twentiesAmount}}</td>
+    <td class="text-right">{{twentiesAmount | number:'1.2-2'}}</td>
   </tr>
   <tr>
     <td>Fifties:</td>
     <td><input [(ngModel)]="fifties"></td>
-    <td>{{fiftiesAmount}}</td>
+    <td class="text-right">{{fiftiesAmount | number:'1.2-2'}}</td>
   </tr>
   <tr>
     <td>Hundreds:</td>
     <td><input [(ngModel)]="hundreds"></td>
-    <td>{{hundredsAmount}}</td>
+    <td class="text-right">{{hundredsAmount | number:'1.2-2'}}</td>
   </tr>
   <tr>
     <td>Totals:</td>
     <td></td>
-    <td>{{totalAmount}}</td>
+    <td class="text-right"><strong>{{totalAmount | number:'1.2-2'}}</strong></td>
   </tr>
 </table>
+		</div>
+    <div class="card col-sm-5">
+    </div>
+</div>    <!-- row -->
+

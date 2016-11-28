@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+declare var moment: any;  // make ts happy
 
 @Component({
   selector: 'app-teller-totals',
@@ -7,7 +8,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TellerTotalsComponent implements OnInit {
 
+
+
   dateValue: Date = new Date();
+
+  get dateValueString(): string {
+    return moment(this.dateValue).format('MM/DD/YYYY');
+  }
+
+  set dateValueString(dateValueString: string) {
+
+    // should do this check only when the enter key or tab is pressed
+    if (moment(dateValueString, 'MM/DD/YYYY').isValid())
+    {
+      this.dateValue = new Date(dateValueString);
+    }
+  }
+
   showDatePicker: boolean = false;
   ones: number;
   twos: number;
