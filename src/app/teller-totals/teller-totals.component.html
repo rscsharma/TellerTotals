@@ -1,6 +1,8 @@
-<h1>
+<div class="container-fluid">
+  
+<h3 class="alert alert-info">
   Teller Totals
-</h1>
+</h3>
 <div class="row">
 	<div class="card col-sm-3">
 
@@ -10,15 +12,20 @@
 
     <label for="date-value">Date</label>
     <div class="input-group">
-       <input type="text" class="form-control" [(ngModel)]="dateValueString" id="date-value">
+
+        <!-- pattern="(?:(?:0[1-9]|1[0-2])[\/\\-. ]?(?:0[1-9]|[12][0-9])|(?:(?:0[13-9]|1[0-2])[\/\\-. ]?30)|(?:(?:0[13578]|1[02])[\/\\-. ]?31))[\/\\-. ]?(?:19|20)[0-9]{2}" -->
+
+       <input type="text" pattern="(0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])[- /.](19|20)\d\d"
+        class="form-control" [(ngModel)]="dateValueString" id="date-value">
        <span class="input-group-btn">
-         <button class="btn btn-secondary" type="button" (click)="showDatePicker = !showDatePicker"><span class="fa fa-calendar"></span></button>
+         <button class="btn btn-secondary" id="date-button" type="button" (click)="showDatePicker = !showDatePicker"><span class="fa fa-calendar"></span></button>
        </span>
     </div>
 
-<div *ngIf="showDatePicker" style="position: absolute; z-index:10; min-height:290px;">
-  <datepicker [(ngModel)]="dateValue" (selectionDone)="showDatePicker = false"></datepicker>
-</div>
+    <div *ngIf="showDatePicker" style="position: absolute; z-index:10; min-height:290px;">
+      <datepicker [(ngModel)]="dateValue" (selectionDone)="showDatePicker = false"></datepicker>
+    </div>
+
 </div>  <!-- col -->
 
 <div class="card col-sm-5">
@@ -32,37 +39,37 @@
   </tr>
   <tr>
     <td>Ones:</td>
-    <td><input [(ngModel)]="ones"></td>
+    <td><input type="number" pattern="^[0-9]" min="0" max="10000" step="1" [(ngModel)]="ones"></td>
     <td class="text-right">{{onesAmount | number:'1.2-2'}}</td>
   </tr>
   <tr>
     <td>Twos:</td>
-    <td><input [(ngModel)]="twos"></td>
+    <td><input type="number" min="0" max="10000" [(ngModel)]="twos"></td>
     <td class="text-right">{{twosAmount | number:'1.2-2'}}</td>
   </tr>
   <tr>
     <td>Fives:</td>
-    <td><input [(ngModel)]="fives"></td>
+    <td><input type="number" min="0" max="10000" [(ngModel)]="fives"></td>
     <td class="text-right">{{fivesAmount | number:'1.2-2'}}</td>
   </tr>
   <tr>
     <td>Tens:</td>
-    <td><input [(ngModel)]="tens"></td>
+    <td><input type="number" min="0" max="10000" [(ngModel)]="tens"></td>
     <td class="text-right">{{tensAmount | number:'1.2-2'}}</td>
   </tr>
   <tr>
     <td>Twenties:</td>
-    <td><input [(ngModel)]="twenties"></td>
+    <td><input type="number" min="0" max="10000" [(ngModel)]="twenties"></td>
     <td class="text-right">{{twentiesAmount | number:'1.2-2'}}</td>
   </tr>
   <tr>
     <td>Fifties:</td>
-    <td><input [(ngModel)]="fifties"></td>
+    <td><input type="number" min="0" max="10000" [(ngModel)]="fifties"></td>
     <td class="text-right">{{fiftiesAmount | number:'1.2-2'}}</td>
   </tr>
   <tr>
     <td>Hundreds:</td>
-    <td><input [(ngModel)]="hundreds"></td>
+    <td><input type="number" min="0" max="10000" [(ngModel)]="hundreds"></td>
     <td class="text-right">{{hundredsAmount | number:'1.2-2'}}</td>
   </tr>
   <tr>
@@ -76,3 +83,4 @@
     </div>
 </div>    <!-- row -->
 
+</div>

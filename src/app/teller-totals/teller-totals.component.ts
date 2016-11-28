@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-declare var moment: any;  // make ts happy
+import * as moment from 'moment';
+
+//declare var moment: any;  // make ts happy
 
 @Component({
   selector: 'app-teller-totals',
