@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import * as moment from 'moment';
 
+import { CurrencyItem } from './currency-item';
+
 //declare var moment: any;  // make ts happy
 
 @Component({
@@ -26,6 +28,8 @@ export class TellerTotalsComponent implements OnInit {
       this.dateValue = new Date(dateValueString);
     }
   }
+
+  currencyItems: CurrencyItem[];
 
   showDatePicker: boolean = false;
   ones: number;
@@ -83,5 +87,10 @@ export class TellerTotalsComponent implements OnInit {
     this.twenties = 10;
     this.fifties = 10;
     this.hundreds = 18;
+
+    this.currencyItems = [];
+    this.currencyItems.push(new CurrencyItem("Hundreds", 18, 1800));
+    this.currencyItems.push(new CurrencyItem("Fifties", 10, 500));
+    this.currencyItems.push(new CurrencyItem("Twenties", 10, 200));
   }
 }
