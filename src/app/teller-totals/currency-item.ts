@@ -1,5 +1,8 @@
 export class CurrencyItem {
-    constructor(public title: string, public count: number, public amount: number) {
+    get amount(): number {
+        return this.count * this.unitValue;
+    }
+    constructor(public title: string, public count: number, public unitValue: number) {
 
     }
 }
