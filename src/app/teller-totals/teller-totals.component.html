@@ -55,7 +55,8 @@
         </tr>
           <tr *ngFor="let dailyTotalItem of dailyTotalItems">
           <td>{{dailyTotalItem.title}}</td>
-          <td class="text-right"><input class="text-right" type="number" pattern="^-?\d+(\.\d{2})" step=".01" [(ngModel)]="dailyTotalItem.amount"></td>
+<!--          <td class="text-right"><input [comNumberInput]="2" class="text-right" type="number" pattern="^-?\d+(\.\d{2})" step=".01" [(ngModel)]="dailyTotalItem.amount"></td>  -->
+          <td class="text-right"><input [comNumberInput]="2" class="text-right" type="text" pattern="^-?\d+(\.\d{2})" [(ngModel)]="dailyTotalItem.amount"></td>
         </tr>
         <tfoot>
           <tr>

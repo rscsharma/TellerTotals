@@ -6,11 +6,13 @@ import { AlertModule, DatepickerModule } from 'ng2-bootstrap/ng2-bootstrap'
 
 import { AppComponent } from './app.component';
 import { TellerTotalsComponent } from './teller-totals/teller-totals.component';
+import { NumberInputDirective } from './common/number-input.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TellerTotalsComponent
+    TellerTotalsComponent,
+    NumberInputDirective
  ],
   imports: [
     BrowserModule,
