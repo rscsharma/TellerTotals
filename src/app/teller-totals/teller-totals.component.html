@@ -1,7 +1,7 @@
 <div class="container-fluid">
   
   <h3 class="alert alert-info">
-    Teller Totals
+    {{title}}
   </h3>
 
   <div class="row">
@@ -40,7 +40,7 @@
           <tr *ngFor="let currencyItem of currencyItems">
           <td>{{currencyItem.title}}</td>
           <td class="text-right"><input class="text-right" type="number" pattern="^[0-9]" min="0" max="10000" step="1" [(ngModel)]="currencyItem.count"></td>
-          <td class="text-right">{{currencyItem.amount | number:'1.2-2'}}</td>
+          <td class="text-right">{{currencyItem.amountString}}</td>
           </tr>
       </table>
 
@@ -55,8 +55,7 @@
         </tr>
           <tr *ngFor="let dailyTotalItem of dailyTotalItems">
           <td>{{dailyTotalItem.title}}</td>
-<!--          <td class="text-right"><input [comNumberInput]="2" class="text-right" type="number" pattern="^-?\d+(\.\d{2})" step=".01" [(ngModel)]="dailyTotalItem.amount"></td>  -->
-          <td class="text-right"><input [comNumberInput]="2" class="text-right" type="text" pattern="^-?\d+(\.\d{2})" [(ngModel)]="dailyTotalItem.amount"></td>
+          <td class="text-right"><input [comNumberInput]="2" class="text-right" type="number" pattern="^-?\d+(\.\d{2})" step=".01" [(ngModel)]="dailyTotalItem.amount"></td>
         </tr>
         <tfoot>
           <tr>

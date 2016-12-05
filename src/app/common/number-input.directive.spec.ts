@@ -5,7 +5,7 @@ import { NumberInputDirective } from './number-input.directive';
 
 describe('NumberInputDirective', () => {
   it('should create an instance', () => {
-    let directive = new NumberInputDirective();
+    let directive = new NumberInputDirective(null, null);
     expect(directive).toBeTruthy();
   });
 });

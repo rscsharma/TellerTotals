@@ -1,5 +1,9 @@
-export class DailyTotalItem {
-    constructor(public title: string, public amount: number) {
 
+export class DailyTotalItem {
+
+    public amount: string;
+
+    constructor(public title: string, amount: number, decimalPlaces: number) {
+       this.amount = amount.toFixed(decimalPlaces);
     }
 }
