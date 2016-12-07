@@ -88,17 +88,30 @@ describe('TellerTotalsComponent', () => {
     expect(debugElement.nativeElement.textContent).toContain(component.title);
   });
 
-  it('should have the values from service', () => {
+  it('should have the currencyItems with counts set from service', () => {
 
-    let index: number = 1;
+    // TellerTotalsService actually injected into the component
+    let tellerTotalsService: TellerTotalsService = fixture.debugElement.injector.get(TellerTotalsService);
+
+    let tellerTotalsServiceResult: TellerTotalsServiceResult = tellerTotalsService.getTotals();
+
+    expect(component.currencyItems.length).toBe(tellerTotalsServiceResult.currencyTypes.size);
+
     for (let currencyItem of component.currencyItems) {
-      expect(currencyItem.count).toBe(index);
-      index++;
-    }
-    index = 10;
-    for (let dailyTotalItem of component.dailyTotalItems) {
-      expect(dailyTotalItem.amount).toBe(index.toFixed(2));
-      index++;
+      expect(currencyItem.count).toBe(tellerTotalsServiceResult.currencyTypes.get(currencyItem.currencyType));
     }
   });
+
+  it('should have the dailyTotalItems with amounts set from service', () => {
+
+    // TellerTotalsService actually injected into the component
+    let tellerTotalsService: TellerTotalsService = fixture.debugElement.injector.get(TellerTotalsService);
+
+    let tellerTotalsServiceResult: TellerTotalsServiceResult = tellerTotalsService.getTotals();
+
+    for (let dailyItem of component.dailyTotalItems) {
+      expect(dailyItem.amount).toBe(tellerTotalsServiceResult.dailyTotalTypes.get(dailyItem.dailyTotalType).toFixed(2));
+    }
+  });
+
 });

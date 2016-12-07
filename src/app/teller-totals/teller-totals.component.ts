@@ -56,26 +56,39 @@ export class TellerTotalsComponent implements OnInit {
 
   ngOnInit() {
 
+    let currencyTypes: CurrencyTypes[] = [
+      CurrencyTypes.Hundreds,
+      CurrencyTypes.Fifties,
+      CurrencyTypes.Twenties,
+      CurrencyTypes.Tens,
+      CurrencyTypes.Fives,
+      CurrencyTypes.Twos,
+      CurrencyTypes.Ones,
+      ];
+
+    let dailyTotalTypes: DailyTotalTypes[] = [
+      DailyTotalTypes.EndingCash,
+      DailyTotalTypes.ChecksReceived,
+      DailyTotalTypes.MoneyOrders,
+      DailyTotalTypes.TravelersChecks,
+      DailyTotalTypes.ChecksDisbursed,
+      DailyTotalTypes.SecondaryChecks,
+      DailyTotalTypes.BondClearing,
+      DailyTotalTypes.BeginingForeign,
+      DailyTotalTypes.EndingForeign
+    ];
+
     let result: TellerTotalsServiceResult = this.tellerTotalsService.getTotals();
 
     this.currencyItems = [];
-    this.currencyItems.push(new CurrencyItem("Hundreds", result.currencyTypes.get(CurrencyTypes.Hundreds), 100));
-    this.currencyItems.push(new CurrencyItem("Fifties", result.currencyTypes.get(CurrencyTypes.Fifties), 50));
-    this.currencyItems.push(new CurrencyItem("Twenties", result.currencyTypes.get(CurrencyTypes.Twenties), 20));
-    this.currencyItems.push(new CurrencyItem("Tens", result.currencyTypes.get(CurrencyTypes.Tens), 10));
-    this.currencyItems.push(new CurrencyItem("Fives", result.currencyTypes.get(CurrencyTypes.Fives), 5));
-    this.currencyItems.push(new CurrencyItem("Twos", result.currencyTypes.get(CurrencyTypes.Twos), 2));
-    this.currencyItems.push(new CurrencyItem("Ones", result.currencyTypes.get(CurrencyTypes.Ones), 1));
-
     this.dailyTotalItems = [];
-    this.dailyTotalItems.push(new DailyTotalItem("Ending Cash", result.dailyTotalTypes.get(DailyTotalTypes.EndingCash), 2));
-    this.dailyTotalItems.push(new DailyTotalItem("Checks Received", result.dailyTotalTypes.get(DailyTotalTypes.ChecksReceived), 2));
-    this.dailyTotalItems.push(new DailyTotalItem("Money Orders", result.dailyTotalTypes.get(DailyTotalTypes.MoneyOrders), 2));
-    this.dailyTotalItems.push(new DailyTotalItem("Traveler's Checks", result.dailyTotalTypes.get(DailyTotalTypes.TravelersChecks), 2));
-    this.dailyTotalItems.push(new DailyTotalItem("Checks Disbursed", result.dailyTotalTypes.get(DailyTotalTypes.ChecksDisbursed), 2));
-    this.dailyTotalItems.push(new DailyTotalItem("Secondary Checks", result.dailyTotalTypes.get(DailyTotalTypes.SecondaryChecks), 2));
-    this.dailyTotalItems.push(new DailyTotalItem("Bond Clearing", result.dailyTotalTypes.get(DailyTotalTypes.BondClearing), 2));
-    this.dailyTotalItems.push(new DailyTotalItem("Begining Foreign", result.dailyTotalTypes.get(DailyTotalTypes.BeginingForeign), 2));
-    this.dailyTotalItems.push(new DailyTotalItem("Ending Foreign", result.dailyTotalTypes.get(DailyTotalTypes.EndingForeign), 2));
+
+    for (var currencyType of currencyTypes) {
+      this.currencyItems.push(new CurrencyItem(currencyType, result.currencyTypes.get(currencyType)));
+    }
+
+    for (var dailyTotalType of dailyTotalTypes) {
+      this.dailyTotalItems.push(new DailyTotalItem(dailyTotalType, result.dailyTotalTypes.get(dailyTotalType), 2));
+    }
   }
 }
