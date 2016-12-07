@@ -114,4 +114,42 @@ describe('TellerTotalsComponent', () => {
     }
   });
 
+  it ('its template should display a currencyTable with the component\'s currencyItems', () => {
+      var table = fixture.debugElement.query(By.css('#currencyTable'));
+      var rows = table.queryAll(By.css('tr'));
+
+      expect(rows.length).toBe(component.currencyItems.length + 1); // 1 for header
+
+
+      let rowIndex: number = 0;
+      for (let td of rows)
+      {
+        if (rowIndex == 0)
+        {
+          var columnHeaders = td.queryAll(By.css('th'));
+          expect(columnHeaders.length).toBe(3);
+          expect(columnHeaders[0].nativeElement.textContent).toBe('Currency Type');
+          expect(columnHeaders[1].nativeElement.textContent).toBe('Count');
+          expect(columnHeaders[2].nativeElement.textContent).toBe('Amount');
+        }
+        else
+        {
+          var dataColumns = td.queryAll(By.css('td'));
+
+          expect(dataColumns.length).toBe(3);
+
+          var inputs = dataColumns[1].queryAll(By.css('input'));         // second column contains input
+          expect(inputs.length).toBe(1);
+
+          // offset rowIndex by 1 to get array index in component to compensate for table header row
+          expect(dataColumns[0].nativeElement.textContent).toBe(component.currencyItems[rowIndex - 1].title);
+
+          // this doesn't work.  value is always ''
+//          expect(inputs[0].nativeElement.textContent).toBe(component.currencyItems[rowIndex - 1].count.toString()); 
+          expect(dataColumns[2].nativeElement.textContent).toBe(component.currencyItems[rowIndex - 1].amountString);
+        }
+        rowIndex++;
+      }
+  });
+
 });
