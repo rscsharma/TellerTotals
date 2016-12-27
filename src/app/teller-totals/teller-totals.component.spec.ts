@@ -88,17 +88,68 @@ describe('TellerTotalsComponent', () => {
     expect(debugElement.nativeElement.textContent).toContain(component.title);
   });
 
-  it('should have the values from service', () => {
+  it('should have the currencyItems with counts set from service', () => {
 
-    let index: number = 1;
+    // TellerTotalsService actually injected into the component
+    let tellerTotalsService: TellerTotalsService = fixture.debugElement.injector.get(TellerTotalsService);
+
+    let tellerTotalsServiceResult: TellerTotalsServiceResult = tellerTotalsService.getTotals();
+
+    expect(component.currencyItems.length).toBe(tellerTotalsServiceResult.currencyTypes.size);
+
     for (let currencyItem of component.currencyItems) {
-      expect(currencyItem.count).toBe(index);
-      index++;
-    }
-    index = 10;
-    for (let dailyTotalItem of component.dailyTotalItems) {
-      expect(dailyTotalItem.amount).toBe(index.toFixed(2));
-      index++;
+      expect(currencyItem.count).toBe(tellerTotalsServiceResult.currencyTypes.get(currencyItem.currencyType));
     }
   });
+
+  it('should have the dailyTotalItems with amounts set from service', () => {
+
+    // TellerTotalsService actually injected into the component
+    let tellerTotalsService: TellerTotalsService = fixture.debugElement.injector.get(TellerTotalsService);
+
+    let tellerTotalsServiceResult: TellerTotalsServiceResult = tellerTotalsService.getTotals();
+
+    for (let dailyItem of component.dailyTotalItems) {
+      expect(dailyItem.amount).toBe(tellerTotalsServiceResult.dailyTotalTypes.get(dailyItem.dailyTotalType).toFixed(2));
+    }
+  });
+
+  it ('its template should display a currencyTable with the component\'s currencyItems', () => {
+      var table = fixture.debugElement.query(By.css('#currencyTable'));
+      var rows = table.queryAll(By.css('tr'));
+
+      expect(rows.length).toBe(component.currencyItems.length + 1); // 1 for header
+
+
+      let rowIndex: number = 0;
+      for (let td of rows)
+      {
+        if (rowIndex == 0)
+        {
+          var columnHeaders = td.queryAll(By.css('th'));
+          expect(columnHeaders.length).toBe(3);
+          expect(columnHeaders[0].nativeElement.textContent).toBe('Currency Type');
+          expect(columnHeaders[1].nativeElement.textContent).toBe('Count');
+          expect(columnHeaders[2].nativeElement.textContent).toBe('Amount');
+        }
+        else
+        {
+          var dataColumns = td.queryAll(By.css('td'));
+
+          expect(dataColumns.length).toBe(3);
+
+          var inputs = dataColumns[1].queryAll(By.css('input'));         // second column contains input
+          expect(inputs.length).toBe(1);
+
+          // offset rowIndex by 1 to get array index in component to compensate for table header row
+          expect(dataColumns[0].nativeElement.textContent).toBe(component.currencyItems[rowIndex - 1].title);
+
+          // this doesn't work.  value is always ''
+//          expect(inputs[0].nativeElement.textContent).toBe(component.currencyItems[rowIndex - 1].count.toString()); 
+          expect(dataColumns[2].nativeElement.textContent).toBe(component.currencyItems[rowIndex - 1].amountString);
+        }
+        rowIndex++;
+      }
+  });
+
 });
