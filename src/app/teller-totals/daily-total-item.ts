@@ -2,19 +2,6 @@ import { DailyTotalTypes } from '../services/daily-total-types.enum';
 
 export class DailyTotalItem {
 
-<<<<<<< HEAD
-    public amount: string;
-    public get value(): number {
-
-        let value: number = Number(this.amount);
-        if (Number.isNaN(value))
-        {
-            return 0;
-        }
-
-        return value;
-    }
-=======
     private static descriptions: Map<DailyTotalTypes, string> = new Map(
         [
             [ DailyTotalTypes.EndingCash, "Ending Cash"],
@@ -27,11 +14,20 @@ export class DailyTotalItem {
             [ DailyTotalTypes.BeginingForeign, "Begining Foreign"],
             [ DailyTotalTypes.EndingForeign, "Ending Foreign"],
         ]);
->>>>>>> 725ce4bd59ac345fcf9424f3f55c52442f2878e6
 
     public readonly dailyTotalType: DailyTotalTypes;
     public readonly amount: string;
 
+    public get value(): number {
+
+        let value: number = Number(this.amount);
+        if (Number.isNaN(value))
+        {
+            return 0;
+        }
+
+        return value;
+    }
     get title(): string {
         return DailyTotalItem.descriptions.get(this.dailyTotalType);
     }
