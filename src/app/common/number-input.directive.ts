@@ -1,13 +1,28 @@
-import { Directive, Input, ElementRef, Renderer, HostListener } from '@angular/core';
+import { Directive, Input, ElementRef, Renderer, HostListener /*, OnInit, AfterViewInit, OnChanges, SimpleChanges */} from '@angular/core';
 
 @Directive({
   selector: '[comNumberInput]'
 })
-export class NumberInputDirective {
+export class NumberInputDirective /*implements OnInit*/ {
 
   @Input("comNumberInput") decimalPlaces: number;  // used in binding and provides number of decimals [comNumberInput]="2"
 
   constructor(private el: ElementRef, private renderer: Renderer) { }
+/*
+  ngOnInit() {
+    this.setValue(this.transform(this.el.nativeElement.value));
+  }
+
+  ngAfterViewInit()
+  {
+    this.setValue(this.transform(this.el.nativeElement.value));
+  }
+
+  ngOnChanges(simpleChanges: SimpleChanges)
+  {
+    this.setValue(this.transform(this.el.nativeElement.value));
+  }
+*/
 
   @HostListener("keydown.Enter", ["$event.target.value"])
   onkeydown(value) {

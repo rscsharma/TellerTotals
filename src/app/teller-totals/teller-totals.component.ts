@@ -45,7 +45,7 @@ export class TellerTotalsComponent implements OnInit {
 
     for (let dailyTotalItem of this.dailyTotalItems)
     {
-      total += Number(dailyTotalItem.amount);
+      total += dailyTotalItem.value;
     }
 
     return total;

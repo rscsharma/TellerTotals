@@ -5,6 +5,10 @@
   </h3>
 
   <div class="row">
+    <form #tellerTotalsForm="ngForm" (ngSubmit)="onSubmit()">
+
+
+
     <!-- pattern="(?:(?:0[1-9]|1[0-2])[\/\\-. ]?(?:0[1-9]|[12][0-9])|(?:(?:0[13-9]|1[0-2])[\/\\-. ]?30)|(?:(?:0[13578]|1[02])[\/\\-. ]?31))[\/\\-. ]?(?:19|20)[0-9]{2}" -->
     <!--
     <alert type="success">hello</alert>
@@ -37,9 +41,9 @@
           <th class="text-right">Count</th>
           <th class="text-right">Amount</th>
         </tr>
-          <tr *ngFor="let currencyItem of currencyItems">
+          <tr *ngFor="let currencyItem of currencyItems; let i = index">
           <td>{{currencyItem.title}}</td>
-          <td class="text-right"><input class="text-right" type="number" pattern="^[0-9]" min="0" max="10000" step="1" [(ngModel)]="currencyItem.count"></td>
+          <td class="text-right"><input class="text-right" [name]="'currencyItem' + i" type="number" pattern="^\d+$" min="0" max="10000" step="1" [(ngModel)]="currencyItem.count"></td>
           <td class="text-right">{{currencyItem.amountString}}</td>
           </tr>
       </table>
@@ -53,9 +57,13 @@
           <th>Daily Totals</th>
           <th class="text-right">Amount</th>
         </tr>
-          <tr *ngFor="let dailyTotalItem of dailyTotalItems">
+          <tr *ngFor="let dailyTotalItem of dailyTotalItems; let i = index">
           <td>{{dailyTotalItem.title}}</td>
-          <td class="text-right"><input [comNumberInput]="2" class="text-right" type="number" pattern="^-?\d+(\.\d{2})" step=".01" [(ngModel)]="dailyTotalItem.amount"></td>
+          <!-- [(ngModel)]="dailyTotalItem.amount" -->
+          <!-- [ngModel]="dailyTotalItem.amount" (ngModelChange)="dailyTotalItem.amount = $event" -->
+          <!-- [value]="dailyTotalItem.amount" (input)="dailyTotalItem.amount = $event.target.value"  ngAfterViewInit sees value in control but ngModel not hooked in for validation -->
+          <!-- type="number" step=".01" pattern="^-?\d+(\.\d{2})?" -->
+          <td class="text-right"><input [(ngModel)]="dailyTotalItem.amount" [comNumberInput]="2" class="text-right" [name]="'dailyTotalItem' + i" type="text" pattern="^-?[0-9]+(\.([0-9]{1,2})?)?$"></td>
         </tr>
         <tfoot>
           <tr>
@@ -65,5 +73,12 @@
         </tfoot>
       </table>
     </div>    <!-- col -->
+    </form>
   </div>    <!-- row -->
+  <div class="row">
+    <div class="col-sm-4">
+      <button type="submit" class="btn btn-default" [disabled]="!tellerTotalsForm.form.valid">Submit</button>
+    </div>
+  </div>
+
 </div>  <!-- container -->
