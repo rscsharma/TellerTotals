@@ -63,7 +63,7 @@
           <!-- [ngModel]="dailyTotalItem.amount" (ngModelChange)="dailyTotalItem.amount = $event" -->
           <!-- [value]="dailyTotalItem.amount" (input)="dailyTotalItem.amount = $event.target.value"  ngAfterViewInit sees value in control but ngModel not hooked in for validation -->
           <!-- type="number" step=".01" pattern="^-?\d+(\.\d{2})?" -->
-          <td class="text-right"><input [(ngModel)]="dailyTotalItem.amount" [comNumberInput]="2" class="text-right" [name]="'dailyTotalItem' + i" type="text" pattern="^-?[0-9]+(\.([0-9]{1,2})?)?$"></td>
+          <td class="text-right"><input [(ngModel)]="dailyTotalItem.amount" [comNumberInput]="2" class="text-right" [name]="'dailyTotalItem' + i" type="text" pattern="^-?[0-9]*(\.([0-9]{1,2})?)?$"></td>
         </tr>
         <tfoot>
           <tr>
