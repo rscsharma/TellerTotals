@@ -5,7 +5,8 @@ import { Directive, Input, ElementRef, Renderer, HostListener /*, OnInit, AfterV
 })
 export class NumberInputDirective /*implements OnInit*/ {
 
-  @Input("comNumberInput") decimalPlaces: number;  // used in binding and provides number of decimals [comNumberInput]="2"
+  @Input("comNumberInput") decimalPlaces: number = 0;  // used in binding and provides number of decimals [comNumberInput]="2"
+  @Input() allowNegative: number = 1;
 
   constructor(private el: ElementRef, private renderer: Renderer) { }
 /*
@@ -37,8 +38,8 @@ export class NumberInputDirective /*implements OnInit*/ {
       event.key == "7" ||
       event.key == "8" ||
       event.key == "9" ||
-      event.key == "." ||
-      event.key == "-" ||
+      (event.key == "." && this.decimalPlaces > 0) ||
+      (event.key == "-" && this.allowNegative != 0) ||
       event.key == "ArrowLeft" ||
       event.key == "ArrowRight" ||
       event.key == "Home" ||

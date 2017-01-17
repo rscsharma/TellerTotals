@@ -54,6 +54,10 @@ export class TellerTotalsComponent implements OnInit {
   constructor(private tellerTotalsService: TellerTotalsService) {
   }
 
+  onSubmit() {
+    
+  }
+
   ngOnInit() {
 
     let currencyTypes: CurrencyTypes[] = [

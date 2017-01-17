@@ -43,7 +43,8 @@
         </tr>
           <tr *ngFor="let currencyItem of currencyItems; let i = index">
           <td>{{currencyItem.title}}</td>
-          <td class="text-right"><input class="text-right" [name]="'currencyItem' + i" type="number" pattern="^\d+$" min="0" max="10000" step="1" [(ngModel)]="currencyItem.count"></td>
+          <!-- <td class="text-right"><input class="text-right" [name]="'currencyItem' + i" type="number" pattern="^\d+$" min="0" max="10000" step="1" [(ngModel)]="currencyItem.count"></td> -->
+          <td class="text-right"><input class="text-right" [(ngModel)]="currencyItem.count" [comNumberInput]="0" allowNegative="0" [name]="'currencyItem' + i" type="text" pattern="^\d+$"></td>
           <td class="text-right">{{currencyItem.amountString}}</td>
           </tr>
       </table>
@@ -63,7 +64,7 @@
           <!-- [ngModel]="dailyTotalItem.amount" (ngModelChange)="dailyTotalItem.amount = $event" -->
           <!-- [value]="dailyTotalItem.amount" (input)="dailyTotalItem.amount = $event.target.value"  ngAfterViewInit sees value in control but ngModel not hooked in for validation -->
           <!-- type="number" step=".01" pattern="^-?\d+(\.\d{2})?" -->
-          <td class="text-right"><input [(ngModel)]="dailyTotalItem.amount" [comNumberInput]="2" class="text-right" [name]="'dailyTotalItem' + i" type="text" pattern="^-?[0-9]*(\.([0-9]{1,2})?)?$"></td>
+          <td class="text-right"><input class="text-right" [(ngModel)]="dailyTotalItem.amount" [comNumberInput]="2" [name]="'dailyTotalItem' + i" type="text" pattern="^-?[0-9]*(\.([0-9]{1,2})?)?$"></td>
         </tr>
         <tfoot>
           <tr>
@@ -77,7 +78,7 @@
   </div>    <!-- row -->
   <div class="row">
     <div class="col-sm-4">
-      <button type="submit" class="btn btn-default" [disabled]="!tellerTotalsForm.form.valid">Submit</button>
+      <button type="submit" class="btn btn-default" [disabled]="!tellerTotalsForm.form.valid" ngC>Submit</button>
     </div>
   </div>
 
